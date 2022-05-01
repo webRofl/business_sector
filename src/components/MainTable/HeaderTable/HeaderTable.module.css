@@ -1,0 +1,16 @@
+.mainTable__headerBlock {
+    display: flex;
+}
+
+.mainTable__headerArrowBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainTable__headerArrow {
+    width: 8px;
+    height: 1px;
+    border-bottom: 1px solid black;
+    margin-bottom: 1px;
+}
