@@ -1,16 +1,35 @@
-.mainTable__headerBlock {
+.headerTable__wrapper {
     display: flex;
+    background-color: #474955;
+    margin-top: 15px;
+    padding: 2% 20% 2% 2%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #fff;
 }
 
-.mainTable__headerArrowBlock {
+.headerTable__infoWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.mainTable__headerArrow {
-    width: 8px;
-    height: 1px;
-    border-bottom: 1px solid black;
-    margin-bottom: 1px;
+.headerTable__headerArrow {
+    width: 12px;
+    height: 6px;
+    margin-left: 40px;
+    transform: rotate(180deg);
+}
+
+.headerTable__idBlock {
+    width: 10%;
+}
+
+.headerTable__titleBlock {
+    width: 49%;
+}
+
+.headerTable__descriptionBlock {
+    width: 41%;
 }
