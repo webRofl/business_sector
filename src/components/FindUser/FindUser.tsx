@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './FindUser.module.css';
 import findIcon from '../../assets/images/find-icon.svg';
+import { findUser } from '../../redux/usersReducer';
+import { useDispatch } from 'react-redux';
 
 type FindUserProps = {};
 
 const FindUser: React.FC<FindUserProps> = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setSearchValue(event.currentTarget.value);
+  };
+
+  const handleClick = () => {
+    dispatch(findUser(searchValue));
+  };
+
   return (
     <div className={classes.findUser__inputBlock}>
       <input
         type="text"
         className={classes.findUser__input}
         placeholder="Поиск"
+        value={searchValue}
+        onChange={handleChange}
       />
       <img
         src={findIcon}
         alt="find icon"
         className={classes.findUser__findIcon}
+        onClick={handleClick}
       />
     </div>
   );

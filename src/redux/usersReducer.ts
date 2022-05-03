@@ -2,24 +2,26 @@ import { User } from './../types/types';
 
 export const LOAD_USERS_ASYNC = 'usersReducer/LOAD_USERS_ASYNC';
 const LOAD_USERS = 'usersReducer/LOAD_USERS';
-const UPDATE_PAGE_BACK = 'usersReducer/UPDATE_PAGE_BACK';
-const UPDATE_PAGE_UP = 'usersReducer/UPDATE_PAGE_UP';
+const SET_PAGE = 'usersReducer/SET_PAGE';
+const FIND_USER = 'usersReducer/FIND_USER';
 
 export type UsersState = {
   users: Array<User>;
-  page: number;
+  page: number | null;
+  foundUsers: Array<User>;
 };
 
 const initialState: UsersState = {
   users: [],
-  page: 1,
+  page: null,
+  foundUsers: [],
 };
 
 type UsersAction =
   | ActionLoadUsersAsync
   | ActionLoadUsers
-  | ActionUpdatePageBack
-  | ActionUpdatePageUp;
+  | ActionSetPage
+  | ActionFindUser;
 
 const usersReducer = (
   state: UsersState = initialState,
@@ -31,15 +33,25 @@ const usersReducer = (
         ...state,
         users: action.users,
       };
-    case UPDATE_PAGE_BACK:
+    case SET_PAGE:
       return {
         ...state,
-        page: (state.page -= 1),
+        page: action.page,
       };
-    case UPDATE_PAGE_UP:
+    case FIND_USER:
+      const foundUsers = state.users.map((user) => {
+        const search = action.search;
+        if (
+          user.body.includes(search) ||
+          user.id.toString().includes(search) ||
+          user.title.includes(search)
+        ) {
+          return user;
+        }
+      });
       return {
         ...state,
-        page: (state.page += 1),
+        foundUsers,
       };
     default:
       return state;
@@ -66,20 +78,24 @@ export const loadUsers = (users: Array<User>): ActionLoadUsers => ({
   users,
 });
 
-type ActionUpdatePageBack = {
-  type: typeof UPDATE_PAGE_BACK;
+type ActionSetPage = {
+  type: typeof SET_PAGE;
+  page: number;
 };
 
-export const updatePageBack = (): ActionUpdatePageBack => ({
-  type: UPDATE_PAGE_BACK,
+export const setPage = (page: number): ActionSetPage => ({
+  type: SET_PAGE,
+  page,
 });
 
-type ActionUpdatePageUp = {
-  type: typeof UPDATE_PAGE_UP;
+type ActionFindUser = {
+  type: typeof FIND_USER;
+  search: string;
 };
 
-export const updatePageUp = (): ActionUpdatePageUp => ({
-  type: UPDATE_PAGE_UP,
+export const findUser = (search: string): ActionFindUser => ({
+  type: FIND_USER,
+  search,
 });
 
 export default usersReducer;

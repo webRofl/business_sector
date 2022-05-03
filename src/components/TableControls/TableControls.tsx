@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalState } from '../../redux/store';
-import { updatePageBack, updatePageUp } from '../../redux/usersReducer';
+import { setPage } from '../../redux/usersReducer';
 import classes from './TableControls.module.css';
 
 type TableControlsProps = {};
@@ -11,14 +11,14 @@ const TableControls: React.FC<TableControlsProps> = () => {
 
   const dispatch = useDispatch();
 
-  const handleBackClick = () => dispatch(updatePageBack());
+  const handleBackClick = () => dispatch(setPage(Number(page) - 1));
 
-  const handleUpClick = () => dispatch(updatePageUp());
+  const handleUpClick = () => dispatch(setPage(Number(page) + 1));
 
   const uploadPages = () => {
     const pages = [];
     for (let i = 0; i < 5; i += 1) {
-      pages.push(<span>{i + 1}</span>);
+      pages.push(<span key={i}>{i + 1}</span>);
     }
     return pages;
   };
