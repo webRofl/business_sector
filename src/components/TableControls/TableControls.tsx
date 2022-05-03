@@ -18,18 +18,32 @@ const TableControls: React.FC<TableControlsProps> = () => {
   const uploadPages = () => {
     const pages = [];
     for (let i = 0; i < 5; i += 1) {
-      pages.push(<span key={i}>{i + 1}</span>);
+      if (page === i + 1)
+        pages.push(
+          <span key={i} className={classes.mainTable__pagination_active}>
+            {i + 1}
+          </span>
+        );
+      else pages.push(<span key={i}>{i + 1}</span>);
     }
     return pages;
   };
 
   return (
-    <div>
-      <button onClick={handleBackClick} disabled={page === 1}>
+    <div className={classes.mainTable__btnBlock}>
+      <button
+        onClick={handleBackClick}
+        disabled={page === 1}
+        className={`${classes.mainTable__btnPrev} ${classes.mainTable__btn}`}
+      >
         Назад
       </button>
-      {uploadPages()}
-      <button onClick={handleUpClick} disabled={page === 5}>
+      <div className={classes.mainTable__pagesBlock}>{uploadPages()}</div>
+      <button
+        onClick={handleUpClick}
+        disabled={page === 5}
+        className={`${classes.mainTable__btnNext} ${classes.mainTable__btn}`}
+      >
         Далее
       </button>
     </div>

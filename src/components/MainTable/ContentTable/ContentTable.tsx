@@ -15,9 +15,9 @@ const ContentTable = () => {
     return users.map((user) => {
       return (
         <tr className={classes.mainTable__tr} key={user.id}>
-          <td>{user.id}</td>
-          <td>{user.title}</td>
-          <td>{user.body}</td>
+          <td className={classes.mainTable__id}>{user.id}</td>
+          <td className={classes.mainTable__title}>{user.title}</td>
+          <td className={classes.mainTable__body}>{user.body}</td>
         </tr>
       );
     });
@@ -26,8 +26,7 @@ const ContentTable = () => {
   return (
     <table>
       <tbody>
-        {/* {foundUsers.length ? uploadUsers(foundUsers) : uploadUsers(users)} */}
-        {uploadUsers(users)}
+        {foundUsers.length ? uploadUsers(foundUsers) : uploadUsers(users)}
       </tbody>
     </table>
   );

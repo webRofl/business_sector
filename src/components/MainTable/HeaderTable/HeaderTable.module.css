@@ -2,10 +2,11 @@
     display: flex;
     background-color: #474955;
     margin-top: 15px;
-    padding: 2% 20% 2% 2%;
+    padding-right: 211px;
+    padding-top: 19px;
+    padding-bottom: 16px;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: 18px;
     color: #fff;
 }
 
@@ -17,7 +18,7 @@
 
 .headerTable__headerArrow {
     width: 12px;
-    height: 6px;
+    height: 12px;
     margin-left: 40px;
     transform: rotate(180deg);
 }

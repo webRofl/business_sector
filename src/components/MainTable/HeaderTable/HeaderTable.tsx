@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './HeaderTable.module.css';
-import arrowUp from '../../../assets/images/arrow-up-icon.svg';
+import arrowUp from '../../../assets/images/arrow-down.png';
 
 type HeaderTableProps = {};
 

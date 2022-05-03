@@ -1,3 +1,39 @@
 .mainTable__pagination_active {
-    color: green
+    color: #7EBC3C;
+}
+
+.mainTable__btnBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainTable__btn {
+    color: #474955;
+    font-weight: 500;
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.mainTable__btnPrev {
+    margin-left: 41px;
+}
+
+.mainTable__btnNext {
+    margin-right: 25px;
+}
+
+.mainTable__pagesBlock {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 18px;
+    width: 104px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
 }
