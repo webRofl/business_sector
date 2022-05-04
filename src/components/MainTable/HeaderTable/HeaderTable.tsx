@@ -3,6 +3,7 @@ import classes from './HeaderTable.module.css';
 import arrowUp from '../../../assets/images/arrow-down.png';
 import { useDispatch } from 'react-redux';
 import { usersSort } from '../../../redux/usersReducer';
+import { Item } from '../../../types/types';
 
 type HeaderTableProps = {};
 
@@ -21,7 +22,7 @@ const HeaderTable: React.FC<HeaderTableProps> = () => {
     if (col !== 'description') setDescriptionSelected(false);
   };
 
-  const sortCondition = (isSelected: boolean, item: string) => {
+  const sortCondition = (isSelected: boolean, item: Item) => {
     if (isSelected) dispatch(usersSort(false, item));
     else dispatch(usersSort(true, item));
   };

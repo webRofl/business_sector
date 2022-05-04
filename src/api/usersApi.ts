@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { User } from '../types/types';
 
-type GetUsersResponse = {
+export type GetUsersResponse = {
   status: number;
   statusText: string;
   data: Array<User>;

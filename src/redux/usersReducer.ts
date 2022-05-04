@@ -1,5 +1,5 @@
 import { usersSortFunc } from '../utils/sort';
-import { User } from './../types/types';
+import { User, Item } from './../types/types';
 
 export const LOAD_USERS_ASYNC = 'usersReducer/LOAD_USERS_ASYNC';
 const LOAD_USERS = 'usersReducer/LOAD_USERS';
@@ -83,7 +83,7 @@ export const loadUsersAsync = (page: number): ActionLoadUsersAsync => ({
   page,
 });
 
-type ActionLoadUsers = {
+export type ActionLoadUsers = {
   type: typeof LOAD_USERS;
   users: Array<User>;
 };
@@ -116,12 +116,12 @@ export const findUser = (search: string): ActionFindUser => ({
 type ActionUsersSort = {
   type: typeof USERS_SORT;
   isAscending: boolean;
-  item: string;
+  item: Item;
 };
 
 export const usersSort = (
   isAscending: boolean,
-  item: string
+  item: Item
 ): ActionUsersSort => ({
   type: USERS_SORT,
   isAscending,
