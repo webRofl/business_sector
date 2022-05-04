@@ -1,4 +1,4 @@
-import { ActionLoadUsers, loadUsers, UsersState } from './../usersReducer';
+import { ActionLoadUsers, loadUsers } from './../usersReducer';
 import {
   call,
   CallEffect,
