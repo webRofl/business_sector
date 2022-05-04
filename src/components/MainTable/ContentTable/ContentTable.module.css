@@ -9,7 +9,6 @@
 }
 
 .mainTable__id {
-    width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,8 +17,9 @@
 }
 
 .mainTable__title {
-    width: 25%;
+    width: 35%;
     border-right: 1px solid #E3E6EC;
+    text-align: center;
 }
 
 .mainTable__body {

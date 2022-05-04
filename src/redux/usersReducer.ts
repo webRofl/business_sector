@@ -1,3 +1,4 @@
+import { usersSortFunc } from '../utils/sort';
 import { User } from './../types/types';
 
 export const LOAD_USERS_ASYNC = 'usersReducer/LOAD_USERS_ASYNC';
@@ -65,8 +66,7 @@ const usersReducer = (
     case USERS_SORT:
       return {
         ...state,
-        //@ts-ignore
-        foundUsers: [state.users.sort((a: User, b: User): number => a - b)],
+        foundUsers: usersSortFunc(action.isAscending, action.item, state.users),
       };
     default:
       return state;
@@ -132,7 +132,7 @@ type ActionClearFoundArray = {
   type: typeof CLEAR_FOUND_ARRAY;
 };
 
-export const clearFoundUsers = () => ({
+export const clearFoundUsers = (): ActionClearFoundArray => ({
   type: CLEAR_FOUND_ARRAY,
 });
 
