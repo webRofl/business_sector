@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalState } from '../../redux/store';
-import { setPage } from '../../redux/usersReducer';
+import { clearFoundUsers, setPage } from '../../redux/usersReducer';
 import classes from './TableControls.module.css';
 
 type TableControlsProps = {};
@@ -11,9 +11,15 @@ const TableControls: React.FC<TableControlsProps> = () => {
 
   const dispatch = useDispatch();
 
-  const handleBackClick = () => dispatch(setPage(Number(page) - 1));
+  const handleBackClick = () => {
+    dispatch(setPage(Number(page) - 1));
+    dispatch(clearFoundUsers());
+  };
 
-  const handleUpClick = () => dispatch(setPage(Number(page) + 1));
+  const handleUpClick = () => {
+    dispatch(setPage(Number(page) + 1));
+    dispatch(clearFoundUsers());
+  };
 
   const uploadPages = () => {
     const pages = [];

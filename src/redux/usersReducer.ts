@@ -5,6 +5,7 @@ const LOAD_USERS = 'usersReducer/LOAD_USERS';
 const SET_PAGE = 'usersReducer/SET_PAGE';
 const FIND_USER = 'usersReducer/FIND_USER';
 const USERS_SORT = 'usersReducer/USERS_SORT';
+const CLEAR_FOUND_ARRAY = 'usersReducer/CLEAR_FOUND_ARRAY';
 
 export type UsersState = {
   users: Array<User>;
@@ -23,7 +24,8 @@ type UsersAction =
   | ActionLoadUsers
   | ActionSetPage
   | ActionFindUser
-  | ActionUsersSort;
+  | ActionUsersSort
+  | ActionClearFoundArray;
 
 const usersReducer = (
   state: UsersState = initialState,
@@ -41,8 +43,8 @@ const usersReducer = (
         page: action.page,
       };
     case FIND_USER:
-      const foundUsers = state.users.map((user) => {
-        const search = action.search;
+      const search = action.search;
+      const foundUsers = state.users.filter((user): User | undefined => {
         if (
           user.body.includes(search) ||
           user.id.toString().includes(search) ||
@@ -54,6 +56,11 @@ const usersReducer = (
       return {
         ...state,
         foundUsers,
+      };
+    case CLEAR_FOUND_ARRAY:
+      return {
+        ...state,
+        foundUsers: [],
       };
     case USERS_SORT:
       return {
@@ -119,6 +126,14 @@ export const usersSort = (
   type: USERS_SORT,
   isAscending,
   item,
+});
+
+type ActionClearFoundArray = {
+  type: typeof CLEAR_FOUND_ARRAY;
+};
+
+export const clearFoundUsers = () => ({
+  type: CLEAR_FOUND_ARRAY,
 });
 
 export default usersReducer;
