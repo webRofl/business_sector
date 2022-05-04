@@ -4,6 +4,7 @@ export const LOAD_USERS_ASYNC = 'usersReducer/LOAD_USERS_ASYNC';
 const LOAD_USERS = 'usersReducer/LOAD_USERS';
 const SET_PAGE = 'usersReducer/SET_PAGE';
 const FIND_USER = 'usersReducer/FIND_USER';
+const USERS_SORT = 'usersReducer/USERS_SORT';
 
 export type UsersState = {
   users: Array<User>;
@@ -21,7 +22,8 @@ type UsersAction =
   | ActionLoadUsersAsync
   | ActionLoadUsers
   | ActionSetPage
-  | ActionFindUser;
+  | ActionFindUser
+  | ActionUsersSort;
 
 const usersReducer = (
   state: UsersState = initialState,
@@ -52,6 +54,12 @@ const usersReducer = (
       return {
         ...state,
         foundUsers,
+      };
+    case USERS_SORT:
+      return {
+        ...state,
+        //@ts-ignore
+        foundUsers: [state.users.sort((a: User, b: User): number => a - b)],
       };
     default:
       return state;
@@ -96,6 +104,21 @@ type ActionFindUser = {
 export const findUser = (search: string): ActionFindUser => ({
   type: FIND_USER,
   search,
+});
+
+type ActionUsersSort = {
+  type: typeof USERS_SORT;
+  isAscending: boolean;
+  item: string;
+};
+
+export const usersSort = (
+  isAscending: boolean,
+  item: string
+): ActionUsersSort => ({
+  type: USERS_SORT,
+  isAscending,
+  item,
 });
 
 export default usersReducer;

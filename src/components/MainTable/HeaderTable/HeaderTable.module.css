@@ -14,13 +14,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .headerTable__headerArrow {
     width: 12px;
     height: 12px;
     margin-left: 40px;
-    transform: rotate(180deg);
+    transition: all 1s;
 }
 
 .headerTable__idBlock {
