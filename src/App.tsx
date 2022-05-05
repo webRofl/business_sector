@@ -5,9 +5,7 @@ import TableControls from './components/TableControls/TableControls';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import classes from './App.module.css';
 
-type AppProps = {};
-
-const App: React.FC<AppProps> = () => {
+const App: React.FC = () => {
   return (
     <main className={classes.mainWrapper}>
       <FindUser />

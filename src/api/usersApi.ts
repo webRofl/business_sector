@@ -4,7 +4,7 @@ import { User } from '../types/types';
 export type GetUsersResponse = {
   status: number;
   statusText: string;
-  data: Array<User>;
+  data: User[];
 };
 
 export const getUsers = (page: number): Promise<GetUsersResponse> => {

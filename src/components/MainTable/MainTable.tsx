@@ -6,9 +6,7 @@ import { loadUsersAsync, setPage } from '../../redux/usersReducer';
 import ContentTable from './ContentTable/ContentTable';
 import HeaderTable from './HeaderTable/HeaderTable';
 
-type MainTableProps = {};
-
-const MainTable: React.FC<MainTableProps> = () => {
+const MainTable: React.FC = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -16,6 +14,12 @@ const MainTable: React.FC<MainTableProps> = () => {
   const page = useSelector((state: GlobalState) => state.users.page);
 
   const urlPage = useMatch('/:id')?.params.id;
+
+  const users = useSelector((state: GlobalState) => state.users.users);
+
+  const foundUsers = useSelector(
+    (state: GlobalState) => state.users.foundUsers
+  );
 
   useEffect(() => {
     if (Number(urlPage) !== page) {
@@ -33,7 +37,7 @@ const MainTable: React.FC<MainTableProps> = () => {
   return (
     <>
       <HeaderTable />
-      <ContentTable />
+      <ContentTable users={users} foundUsers={foundUsers} />
     </>
   );
 };

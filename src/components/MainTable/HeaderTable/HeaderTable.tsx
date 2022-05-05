@@ -5,18 +5,18 @@ import { useDispatch } from 'react-redux';
 import { usersSort } from '../../../redux/usersReducer';
 import { Item } from '../../../types/types';
 
-type HeaderTableProps = {};
-
-const HeaderTable: React.FC<HeaderTableProps> = () => {
+const HeaderTable: React.FC = () => {
   const dispatch = useDispatch();
 
-  const [isIdSelected, setIdSelected] = useState(false);
+  const [isIdSelected, setIdSelected] = useState<boolean>(false);
 
-  const [isTitleSelected, setTitleSelected] = useState(false);
+  const [isTitleSelected, setTitleSelected] = useState<boolean>(false);
 
-  const [isDescriptionSelected, setDescriptionSelected] = useState(false);
+  const [isDescriptionSelected, setDescriptionSelected] =
+    useState<boolean>(false);
 
   const zeroingArrowAngle = (col: string) => {
+    // set all column to false except col variable
     if (col !== 'id') setIdSelected(false);
     if (col !== 'title') setTitleSelected(false);
     if (col !== 'description') setDescriptionSelected(false);

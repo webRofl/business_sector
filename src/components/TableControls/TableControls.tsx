@@ -4,9 +4,7 @@ import { GlobalState } from '../../redux/store';
 import { clearFoundUsers, setPage } from '../../redux/usersReducer';
 import classes from './TableControls.module.css';
 
-type TableControlsProps = {};
-
-const TableControls: React.FC<TableControlsProps> = () => {
+const TableControls: React.FC = () => {
   const page = useSelector((state: GlobalState) => state.users.page);
 
   const dispatch = useDispatch();

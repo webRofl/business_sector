@@ -1,18 +1,22 @@
 import { usersSortFunc } from '../utils/sort';
 import { User, Item } from './../types/types';
-
-export const LOAD_USERS_ASYNC = 'usersReducer/LOAD_USERS_ASYNC';
-const LOAD_USERS = 'usersReducer/LOAD_USERS';
-const SET_PAGE = 'usersReducer/SET_PAGE';
-const FIND_USER = 'usersReducer/FIND_USER';
-const USERS_SORT = 'usersReducer/USERS_SORT';
-const CLEAR_FOUND_ARRAY = 'usersReducer/CLEAR_FOUND_ARRAY';
-
-export type UsersState = {
-  users: Array<User>;
-  page: number | null;
-  foundUsers: Array<User>;
-};
+import {
+  CLEAR_FOUND_ARRAY,
+  FIND_USER,
+  LOAD_USERS,
+  LOAD_USERS_ASYNC,
+  SET_PAGE,
+  USERS_SORT,
+} from './usersReducerActionsType';
+import {
+  ActionClearFoundArray,
+  ActionFindUser,
+  ActionLoadUsers,
+  ActionLoadUsersAsync,
+  ActionSetPage,
+  ActionUsersSort,
+  UsersState,
+} from './usersReducerTypes';
 
 const initialState: UsersState = {
   users: [],
@@ -73,51 +77,25 @@ const usersReducer = (
   }
 };
 
-type ActionLoadUsersAsync = {
-  type: typeof LOAD_USERS_ASYNC;
-  page: number;
-};
-
 export const loadUsersAsync = (page: number): ActionLoadUsersAsync => ({
   type: LOAD_USERS_ASYNC,
   page,
 });
 
-export type ActionLoadUsers = {
-  type: typeof LOAD_USERS;
-  users: Array<User>;
-};
-
-export const loadUsers = (users: Array<User>): ActionLoadUsers => ({
+export const loadUsers = (users: User[]): ActionLoadUsers => ({
   type: LOAD_USERS,
   users,
 });
-
-type ActionSetPage = {
-  type: typeof SET_PAGE;
-  page: number;
-};
 
 export const setPage = (page: number): ActionSetPage => ({
   type: SET_PAGE,
   page,
 });
 
-type ActionFindUser = {
-  type: typeof FIND_USER;
-  search: string;
-};
-
 export const findUser = (search: string): ActionFindUser => ({
   type: FIND_USER,
   search,
 });
-
-type ActionUsersSort = {
-  type: typeof USERS_SORT;
-  isAscending: boolean;
-  item: Item;
-};
 
 export const usersSort = (
   isAscending: boolean,
@@ -127,10 +105,6 @@ export const usersSort = (
   isAscending,
   item,
 });
-
-type ActionClearFoundArray = {
-  type: typeof CLEAR_FOUND_ARRAY;
-};
 
 export const clearFoundUsers = (): ActionClearFoundArray => ({
   type: CLEAR_FOUND_ARRAY,

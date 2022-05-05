@@ -1,16 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { GlobalState } from '../../../redux/store';
 import { User } from '../../../types/types';
 import classes from './ContentTable.module.css';
 
-const ContentTable = () => {
-  const users = useSelector((state: GlobalState) => state.users.users);
+type ContentTableProps = {
+  users: User[];
+  foundUsers: User[];
+};
 
-  const foundUsers = useSelector(
-    (state: GlobalState) => state.users.foundUsers
-  );
-
+const ContentTable: React.FC<ContentTableProps> = (props) => {
   const uploadUsers = (users: Array<User>) => {
     return users.map((user) => {
       return (
@@ -26,7 +23,9 @@ const ContentTable = () => {
   return (
     <table>
       <tbody>
-        {foundUsers.length ? uploadUsers(foundUsers) : uploadUsers(users)}
+        {props.foundUsers.length
+          ? uploadUsers(props.foundUsers)
+          : uploadUsers(props.users)}
       </tbody>
     </table>
   );

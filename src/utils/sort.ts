@@ -3,9 +3,9 @@ import { User, Item } from './../types/types';
 export const usersSortFunc = (
   isAscending: boolean,
   item: Item,
-  usersArray: Array<User>
+  usersArray: User[]
 ) => {
-  const sort = (users: Array<User>): Array<User> => {
+  const sort = (users: User[]): User[] => {
     if (users.length < 2) return users;
 
     const pivotIndex = Math.ceil((users.length - 1) / 2);

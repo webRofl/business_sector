@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import classes from './FindUser.module.css';
 import findIcon from '../../assets/images/find-icon.svg';
 import { findUser } from '../../redux/usersReducer';
 import { useDispatch } from 'react-redux';
 
-type FindUserProps = {};
-
-const FindUser: React.FC<FindUserProps> = () => {
-  const [searchValue, setSearchValue] = useState('');
+const FindUser: React.FC = () => {
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const dispatch = useDispatch();
 

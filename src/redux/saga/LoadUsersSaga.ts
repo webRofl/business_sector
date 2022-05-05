@@ -16,7 +16,7 @@ type LoadWorkerAction = {
 };
 
 type ResponseLoadUsers = {
-  data: Array<User>;
+  data: User[];
   status: number;
 };
 

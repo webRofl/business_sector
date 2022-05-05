@@ -1,19 +1,10 @@
 import React from 'react';
 import pageNotFoundImg from '../../assets/images/page-not-found.webp';
+import classes from './PageNotFound.module.css';
 
-type PageNotFoundProps = {};
-
-const PageNotFound: React.FC<PageNotFoundProps> = () => {
+const PageNotFound: React.FC = () => {
   return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div className={classes.errorWrapper}>
       <img src={pageNotFoundImg} alt="page not found" />
     </div>
   );
