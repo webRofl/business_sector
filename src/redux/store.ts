@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { loadUsersWatcher } from './saga/LoadUsersSaga';
-import usersReducer, { UsersState } from './usersReducer';
+import usersReducer from './usersReducer';
+import { UsersState } from './usersReducerTypes';
 
 const sagaMiddleware = createSagaMiddleware();
 

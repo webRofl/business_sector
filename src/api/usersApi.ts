@@ -12,3 +12,9 @@ export const getUsers = (page: number): Promise<GetUsersResponse> => {
     `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`
   );
 };
+
+export const findUser = (str: string, page: number) => {
+  return axios.get(
+    `https://jsonplaceholder.typicode.com/posts?q=${str}&_page=${page}&_limit=10`
+  );
+};

@@ -1,20 +1,25 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import classes from './FindUser.module.css';
 import findIcon from '../../assets/images/find-icon.svg';
-import { findUser } from '../../redux/usersReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { findUserAsync, setSearchValue } from '../../redux/usersReducer';
+import { GlobalState } from '../../redux/store';
 
 const FindUser: React.FC = () => {
-  const [searchValue, setSearchValue] = useState<string>('');
-
   const dispatch = useDispatch();
 
+  const searchValue = useSelector(
+    (state: GlobalState) => state.users.searchValue
+  );
+
+  const page = useSelector((state: GlobalState) => state.users.page);
+
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setSearchValue(event.currentTarget.value);
+    dispatch(setSearchValue(event.currentTarget.value));
   };
 
   const handleClick = () => {
-    dispatch(findUser(searchValue));
+    dispatch(findUserAsync(searchValue, page));
   };
 
   return (

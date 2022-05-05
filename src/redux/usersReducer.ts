@@ -2,18 +2,24 @@ import { usersSortFunc } from '../utils/sort';
 import { User, Item } from './../types/types';
 import {
   CLEAR_FOUND_ARRAY,
-  FIND_USER,
+  FIND_USER_ASYNC,
   LOAD_USERS,
   LOAD_USERS_ASYNC,
+  SET_FOUND_USERS,
   SET_PAGE,
+  SET_SEARCH_VALUE,
+  SET_TOTAL_USERS_COUNT,
   USERS_SORT,
 } from './usersReducerActionsType';
 import {
   ActionClearFoundArray,
-  ActionFindUser,
+  ActionFindUserAsync,
   ActionLoadUsers,
   ActionLoadUsersAsync,
+  ActionSetFoundUsers,
   ActionSetPage,
+  ActionSetSearchValue,
+  ActionSetTotalUsersCount,
   ActionUsersSort,
   UsersState,
 } from './usersReducerTypes';
@@ -22,15 +28,18 @@ const initialState: UsersState = {
   users: [],
   page: null,
   foundUsers: [],
+  totalUsersCount: 0,
+  searchValue: '',
 };
 
 type UsersAction =
-  | ActionLoadUsersAsync
   | ActionLoadUsers
   | ActionSetPage
-  | ActionFindUser
   | ActionUsersSort
-  | ActionClearFoundArray;
+  | ActionClearFoundArray
+  | ActionSetTotalUsersCount
+  | ActionSetFoundUsers
+  | ActionSetSearchValue;
 
 const usersReducer = (
   state: UsersState = initialState,
@@ -47,30 +56,41 @@ const usersReducer = (
         ...state,
         page: action.page,
       };
-    case FIND_USER:
-      const search = action.search;
-      const foundUsers = state.users.filter((user): User | undefined => {
-        if (
-          user.body.includes(search) ||
-          user.id.toString().includes(search) ||
-          user.title.includes(search)
-        ) {
-          return user;
-        }
-      });
-      return {
-        ...state,
-        foundUsers,
-      };
     case CLEAR_FOUND_ARRAY:
       return {
         ...state,
         foundUsers: [],
       };
     case USERS_SORT:
+      if (state.foundUsers.length) {
+        return {
+          ...state,
+          foundUsers: usersSortFunc(
+            action.isAscending,
+            action.item,
+            state.foundUsers
+          ),
+        };
+      }
+
       return {
         ...state,
         foundUsers: usersSortFunc(action.isAscending, action.item, state.users),
+      };
+    case SET_TOTAL_USERS_COUNT:
+      return {
+        ...state,
+        totalUsersCount: action.totalUsersCount,
+      };
+    case SET_FOUND_USERS:
+      return {
+        ...state,
+        foundUsers: action.foundUsers,
+      };
+    case SET_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.searchValue,
       };
     default:
       return state;
@@ -92,11 +112,6 @@ export const setPage = (page: number): ActionSetPage => ({
   page,
 });
 
-export const findUser = (search: string): ActionFindUser => ({
-  type: FIND_USER,
-  search,
-});
-
 export const usersSort = (
   isAscending: boolean,
   item: Item
@@ -108,6 +123,32 @@ export const usersSort = (
 
 export const clearFoundUsers = (): ActionClearFoundArray => ({
   type: CLEAR_FOUND_ARRAY,
+});
+
+export const setTotalUsersCount = (
+  totalUsersCount: number
+): ActionSetTotalUsersCount => ({
+  type: SET_TOTAL_USERS_COUNT,
+  totalUsersCount,
+});
+
+export const findUserAsync = (
+  str: string,
+  page: number | null
+): ActionFindUserAsync => ({
+  type: FIND_USER_ASYNC,
+  str,
+  page,
+});
+
+export const setFoundUsers = (foundUsers: User[]): ActionSetFoundUsers => ({
+  type: SET_FOUND_USERS,
+  foundUsers,
+});
+
+export const setSearchValue = (searchValue: string): ActionSetSearchValue => ({
+  type: SET_SEARCH_VALUE,
+  searchValue,
 });
 
 export default usersReducer;

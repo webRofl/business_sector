@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { GlobalState } from '../../redux/store';
-import { loadUsersAsync, setPage } from '../../redux/usersReducer';
+import {
+  findUserAsync,
+  loadUsersAsync,
+  setPage,
+} from '../../redux/usersReducer';
 import ContentTable from './ContentTable/ContentTable';
 import HeaderTable from './HeaderTable/HeaderTable';
 
@@ -17,6 +21,10 @@ const MainTable: React.FC = () => {
 
   const users = useSelector((state: GlobalState) => state.users.users);
 
+  const searchValue = useSelector(
+    (state: GlobalState) => state.users.searchValue
+  );
+
   const foundUsers = useSelector(
     (state: GlobalState) => state.users.foundUsers
   );
@@ -29,6 +37,11 @@ const MainTable: React.FC = () => {
 
   useEffect(() => {
     if (page) {
+      if (foundUsers.length) {
+        dispatch(findUserAsync(searchValue, page));
+        return;
+      }
+
       dispatch(loadUsersAsync(page));
       navigate('/' + page);
     }

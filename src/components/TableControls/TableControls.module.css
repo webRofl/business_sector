@@ -37,3 +37,11 @@
     align-items: center;
     margin-top: 16px;
 }
+
+.mainTable__pagination {
+    margin-left: 8px;
+}
+
+.mainTable__pagination_active {
+    margin-left: 8px;
+}

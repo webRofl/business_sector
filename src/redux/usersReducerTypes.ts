@@ -1,10 +1,13 @@
 import { Item, User } from '../types/types';
 import {
   CLEAR_FOUND_ARRAY,
-  FIND_USER,
+  FIND_USER_ASYNC,
   LOAD_USERS,
   LOAD_USERS_ASYNC,
+  SET_FOUND_USERS,
   SET_PAGE,
+  SET_SEARCH_VALUE,
+  SET_TOTAL_USERS_COUNT,
   USERS_SORT,
 } from './usersReducerActionsType';
 
@@ -12,6 +15,8 @@ export type UsersState = {
   users: User[];
   page: number | null;
   foundUsers: User[];
+  totalUsersCount: number;
+  searchValue: string;
 };
 
 export type ActionLoadUsersAsync = {
@@ -29,11 +34,6 @@ export type ActionSetPage = {
   page: number;
 };
 
-export type ActionFindUser = {
-  type: typeof FIND_USER;
-  search: string;
-};
-
 export type ActionUsersSort = {
   type: typeof USERS_SORT;
   isAscending: boolean;
@@ -42,4 +42,25 @@ export type ActionUsersSort = {
 
 export type ActionClearFoundArray = {
   type: typeof CLEAR_FOUND_ARRAY;
+};
+
+export type ActionSetTotalUsersCount = {
+  type: typeof SET_TOTAL_USERS_COUNT;
+  totalUsersCount: number;
+};
+
+export type ActionFindUserAsync = {
+  type: typeof FIND_USER_ASYNC;
+  str: string;
+  page: number | null;
+};
+
+export type ActionSetFoundUsers = {
+  type: typeof SET_FOUND_USERS;
+  foundUsers: User[];
+};
+
+export type ActionSetSearchValue = {
+  type: typeof SET_SEARCH_VALUE;
+  searchValue: string;
 };
